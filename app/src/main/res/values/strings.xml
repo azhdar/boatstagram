@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BoatStagram</string>
+    <string name="action_download_all_images">Download all images</string>
+</resources>
