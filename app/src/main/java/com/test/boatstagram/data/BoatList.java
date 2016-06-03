@@ -1,9 +1,10 @@
-package com.test.boatstagram;
+package com.test.boatstagram.data;
 
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.test.boatstagram.ui.list.BoatStagramListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +28,10 @@ public class BoatList {
         updateBoatStagramFromApi();
     }
 
+
+    /*
+     * SINGLETON
+     */
     public static BoatList getInstance() {
         if (mInstance == null) {
             mInstance = new BoatList();
@@ -63,10 +68,10 @@ public class BoatList {
                     }
 
                 } catch (Exception e) {
-                    Log.e(MainActivity.LOG_TAG, "Error while parsing");
+                    Log.e(BoatStagramListActivity.LOG_TAG, "Error while parsing");
                 }
 
-                Log.d(MainActivity.LOG_TAG, "boatStagramItemArrayList size = " + boatStagramItemArrayList.size());
+                Log.d(BoatStagramListActivity.LOG_TAG, "boatStagramItemArrayList size = " + boatStagramItemArrayList.size());
 
                 fireOnSuccess(boatStagramItemArrayList);
             }
@@ -74,31 +79,20 @@ public class BoatList {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-                Log.e(MainActivity.LOG_TAG, "Bad API response");
+                Log.e(BoatStagramListActivity.LOG_TAG, "Bad API response");
                 fireOnError();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                Log.e(MainActivity.LOG_TAG, "Error " + statusCode);
-                Log.e(MainActivity.LOG_TAG, responseString, throwable);
+                Log.e(BoatStagramListActivity.LOG_TAG, "Error " + statusCode);
+                Log.e(BoatStagramListActivity.LOG_TAG, responseString, throwable);
                 fireOnError();
             }
 
         });
     }
-
-    /*public String[] getUrlPhotosStringArray() {
-        if (boatStagramItemArrayList == null)
-            return new String[0];
-
-        ArrayList<String> urlPhotosList = new ArrayList<>();
-        for (BoatStagramItem item : boatStagramItemArrayList) {
-            urlPhotosList.add(item.getDisplayImageUrl());
-        }
-        return urlPhotosList.toArray(new String[boatStagramItemArrayList.size()]);
-    }*/
 
     /*
         LISTENERS

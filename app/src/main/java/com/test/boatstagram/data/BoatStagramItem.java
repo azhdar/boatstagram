@@ -1,4 +1,4 @@
-package com.test.boatstagram;
+package com.test.boatstagram.data;
 
 import org.json.JSONException;
 import org.json.JSONObject;

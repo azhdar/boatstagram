@@ -1,11 +1,10 @@
-package com.test.boatstagram;
+package com.test.boatstagram.ui.list;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.test.boatstagram.R;
+import com.test.boatstagram.data.BoatList;
+import com.test.boatstagram.data.BoatStagramItem;
+import com.test.boatstagram.data.OnBoatListListener;
+import com.test.boatstagram.service.DownloadService;
+import com.test.boatstagram.ui.fullscreen.FullscreenBoatStagramItemActivity;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnBoatListListener {
+public class BoatStagramListActivity extends AppCompatActivity implements OnBoatListListener {
 
     public final static String EXTRA_BOATSTAGRAM_BIG_IMAGE_URL = "com.test.boatstagram.BOATSTAGRAM_BIG_IMAGE_URL";
     public final static String LOG_TAG = "BoatList";
@@ -65,6 +71,32 @@ public class MainActivity extends AppCompatActivity implements OnBoatListListene
         boatStagramListAdapter = new BoatStagramListAdapter(this, BoatList.getInstance().getBoatStagramItemArrayList());
 
         listView.setAdapter(boatStagramListAdapter);
+
+
+        /*BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
+                    long downloadId = intent.getLongExtra(
+                            DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+                    Query query = new Query();
+                    query.setFilterById(enqueue);
+                    Cursor c = dm.query(query);
+                    if (c.moveToFirst()) {
+                        int columnIndex = c
+                                .getColumnIndex(DownloadManager.COLUMN_STATUS);
+                        if (DownloadManager.STATUS_SUCCESSFUL == c
+                                .getInt(columnIndex)) {
+
+                            view.setImageURI(Uri.parse(uriString));
+                        }
+                    }
+                }
+            }
+        };
+
+        registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));*/
     }
 
     @Override
@@ -100,8 +132,14 @@ public class MainActivity extends AppCompatActivity implements OnBoatListListene
         if (id == R.id.action_download_all_images) {
             setDownloadAllImagesButtonEnabled(false);
 
-            Intent downloadAllImagesStickyService = new Intent(this, DownloadAllImagesStickyService.class);
-            startService(downloadAllImagesStickyService);
+            if (BoatList.getInstance().getBoatStagramItemArrayList().size() == 0) {
+                Toast.makeText(this, "Nothing to download", Toast.LENGTH_LONG).show();
+                return true;
+            } else {
+                Toast.makeText(this, BoatList.getInstance().getBoatStagramItemArrayList().size() + " image(s) will be downloaded", Toast.LENGTH_LONG).show();
+                Intent downloadServiceIntent = new Intent(this, DownloadService.class);
+                startService(downloadServiceIntent);
+            }
 
             return true;
         }
@@ -114,13 +152,6 @@ public class MainActivity extends AppCompatActivity implements OnBoatListListene
             return;
 
         menu.getItem(0).setEnabled(enabled);
-    }
-
-    private void updateDownloadAllImagesButtonText() {
-        if (menu == null || menu.getItem(0) == null)
-            return;
-
-        //menu.getItem(0).setEnabled(BoatList.getInstance().);
     }
 
 }

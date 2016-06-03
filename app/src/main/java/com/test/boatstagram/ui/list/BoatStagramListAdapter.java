@@ -1,4 +1,4 @@
-package com.test.boatstagram;
+package com.test.boatstagram.ui.list;
 
 import android.content.Context;
 import android.text.Html;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.test.boatstagram.data.BoatStagramItem;
+import com.test.boatstagram.R;
 
 import java.util.List;
 

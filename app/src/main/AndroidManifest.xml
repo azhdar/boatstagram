@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.list.BoatStagramListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,13 +23,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FullscreenBoatStagramItemActivity"
+            android:name=".ui.fullscreen.FullscreenBoatStagramItemActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" />
 
         <service
-            android:name=".DownloadAllImagesStickyService"
+            android:name=".service.DownloadService"
             android:enabled="true"
             android:exported="true"></service>
     </application>

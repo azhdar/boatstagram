@@ -1,4 +1,4 @@
-package com.test.boatstagram;
+package com.test.boatstagram.data;
 
 import java.util.ArrayList;
 

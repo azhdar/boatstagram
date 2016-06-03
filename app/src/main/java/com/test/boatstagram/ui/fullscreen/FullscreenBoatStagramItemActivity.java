@@ -1,18 +1,18 @@
-package com.test.boatstagram;
+package com.test.boatstagram.ui.fullscreen;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.test.boatstagram.R;
+import com.test.boatstagram.ui.list.BoatStagramListActivity;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -103,7 +103,7 @@ public class FullscreenBoatStagramItemActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra(MainActivity.EXTRA_BOATSTAGRAM_BIG_IMAGE_URL);
+        String url = intent.getStringExtra(BoatStagramListActivity.EXTRA_BOATSTAGRAM_BIG_IMAGE_URL);
 
         photoView = (PhotoView) findViewById(R.id.iv_photo);
 

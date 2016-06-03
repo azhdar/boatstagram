@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.test.boatstagram.MainActivity" >
+    tools:context=".ui.list.BoatStagramListActivity" >
     <item android:id="@+id/action_download_all_images"
         android:title="@string/action_download_all_images"
         android:orderInCategory="100"
