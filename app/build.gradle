@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'boatstagram'
+            keyPassword 'MotDePasseBeaucoupTropFacile'
+            storePassword 'MotDePasseBeaucoupTropFacile'
+            storeFile file("myreleasekey.jks")
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "com.test.boatstagram"
         minSdkVersion 15
@@ -14,27 +21,24 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
     // Android compat things
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
-
     // Design support library
     compile 'com.android.support:design:23.4.0'
-
     // BoatStagram Libraries
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
-
     // Testing
     androidTestCompile 'com.android.support:support-annotations:23.4.0'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
