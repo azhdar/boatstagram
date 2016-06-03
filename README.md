@@ -1,9 +1,12 @@
 # BoatStagram
 
-≃ 10 heures (le 26 mai 2016)
+≃ 15 heures (le 3 juin 2016)
 
-Il manque des tests (bientôt) et un message de fin de téléchargement.
+JUnit et Expresso pour quelques tests unitaires et d’interface
 
+Android 4 minimum (api level 15)
+
+Testé sur Nexus 7 2012 (5.1) et Samsung Galaxy S5 (4.4)
 
 ## Design Patterns
  - **All** use Model View Controller
